@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GLOBAL AI LEARNING | Code with Bala Krishna</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #020617;
+  color: white;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  background:
+    radial-gradient(circle at top, #312e81, #020617 65%);
+}
+
+.hero-content {
+  max-width: 1000px;
+}
+
+.small-title {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #a5b4fc;
+  margin-bottom: 20px;
+}
+
+.main-title {
+  font-size: clamp(45px, 10vw, 100px);
+  font-weight: 900;
+  letter-spacing: 4px;
+  margin: 0;
+  background: linear-gradient(90deg, #ffffff, #818cf8, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 22px;
+  color: #cbd5e1;
+  margin-top: 25px;
+  line-height: 1.6;
+}
+
+.buttons {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #6366f1;
+  color: white;
+}
+
+button:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+.section {
+  padding: 70px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 18px;
+  padding: 28px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #6366f1;
+}
+
+.icon {
+  font-size: 40px;
+}
+
+.card h3 {
+  font-size: 22px;
+}
+
+.card p {
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.astra {
+  background: #0f172a;
+  border-radius: 22px;
+  padding: 30px;
+  border: 1px solid #334155;
+}
+
+.astra h2 {
+  margin-top: 0;
+}
+
+.chat {
+  height: 300px;
+  background: #020617;
+  border-radius: 15px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+  max-width: 80%;
+}
+
+.bot {
+  background: #334155;
+}
+
+.user {
+  background: #4f46e5;
+  margin-left: auto;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+input {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+footer {
+  text-align: center;
+  padding: 35px;
+  background: #000;
+  color: #94a3b8;
+}
+
+</style>
+
+<style>
+#courseModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(2,6,23,.96);overflow:auto;padding:20px}
+.course-shell{max-width:1100px;margin:20px auto;background:#0f172a;border:1px solid #334155;border-radius:22px;padding:24px}
+.course-top{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}
+.course-top h2{margin:0}.course-close{background:#334155}
+.progress-wrap{margin:20px 0}.progress-bar{height:12px;background:#1e293b;border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:0;background:#6366f1}
+.lesson-layout{display:grid;grid-template-columns:280px 1fr;gap:20px}
+.lesson-list{background:#020617;border-radius:16px;padding:12px;max-height:65vh;overflow:auto}
+.lesson-item{padding:13px;border-radius:10px;margin:6px 0;cursor:pointer;color:#cbd5e1}
+.lesson-item.active,.lesson-item:hover{background:#312e81;color:#fff}
+.lesson-content{background:#020617;border-radius:16px;padding:24px;min-height:500px}
+.lesson-content h3{font-size:30px}.lesson-content p,.lesson-content li{color:#cbd5e1;line-height:1.7}
+.lesson-content pre{background:#0b1220;border:1px solid #334155;padding:18px;border-radius:12px;overflow:auto;color:#e2e8f0}
+.practice{margin-top:25px;border-top:1px solid #334155;padding-top:20px}
+.practice textarea{width:100%;min-height:160px;background:#0b1220;color:#fff;border:1px solid #475569;border-radius:12px;padding:15px;font-family:monospace}
+.course-actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:20px}
+@media(max-width:700px){.lesson-layout{grid-template-columns:1fr}.lesson-list{max-height:220px}.lesson-content{padding:16px}}
+</style>
+<div id="courseModal">
+  <div class="course-shell">
+    <div class="course-top">
+      <h2 id="courseTitle">Course</h2>
+      <button class="course-close" onclick="closeCourse()">✕ Close</button>
+    </div>
+    <div class="progress-wrap">
+      <div id="progressText">0% complete</div>
+      <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+    </div>
+    <div class="lesson-layout">
+      <div class="lesson-list" id="lessonList"></div>
+      <div class="lesson-content" id="lessonContent"></div>
+    </div>
+  </div>
+</div>
+
+</head>
+
+<body>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<div class="small-title">
+CODE WITH BALA KRISHNA
+</div>
+
+<h1 class="main-title">
+GLOBAL AI LEARNING
+</h1>
+
+<p class="subtitle">
+Learn AI • Coding • Technology • Build the Future
+</p>
+
+<div class="buttons">
+
+<button onclick="goLearning()">
+🚀 Start Learning
+</button>
+
+<button onclick="goAstra()">
+✨ Astra GPT
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="learning">
+
+<h2>🌍 Global AI Learning</h2>
+
+<div class="cards">
+
+<div class="card" onclick="openCourse('AI')">
+<div class="icon">🤖</div>
+<h3>Artificial Intelligence</h3>
+<p>
+Learn the basics of AI, machine learning,
+generative AI and modern AI technology.
+</p>
+</div>
+
+<div class="card" onclick="openCourse('Coding')">
+<div class="icon">💻</div>
+<h3>Coding</h3>
+<p>
+Learn programming and build your
+own useful projects.
+</p>
+</div>
+
+<div class="card" onclick="openCourse('Web Development')">
+<div class="icon">🌐</div>
+<h3>Web Development</h3>
+<p>
+Learn HTML, CSS and JavaScript
+to create websites.
+</p>
+</div>
+
+<div class="card" onclick="openCourse('AI Skills')">
+<div class="icon">🧠</div>
+<h3>AI Skills</h3>
+<p>
+Develop practical skills for the
+future of technology.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="astra">
+
+<h2>✨ Astra GPT</h2>
+
+<div class="astra">
+
+<div class="chat" id="chat">
+
+<div class="message bot">
+Hello 👋 I am Astra GPT.
+Ask me about AI, coding or learning.
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+id="input"
+placeholder="Ask Astra GPT..."
+onkeydown="handleKey(event)"
+>
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<strong>CODE WITH BALA KRISHNA</strong>
+
+<br><br>
+
+GLOBAL AI LEARNING
+
+<br><br>
+
+Learn • Build • Create • Explore
+
+</footer>
+
+<script>
+
+function goLearning() {
+  document.getElementById("learning").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function goAstra() {
+  document.getElementById("astra").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function addMessage(text, type) {
+  const chat = document.getElementById("chat");
+  const message = document.createElement("div");
+
+  message.className = "message " + type;
+  message.textContent = text;
+
+  chat.appendChild(message);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function getReply(question) {
+
+  const q = question.toLowerCase();
+
+  if (q.includes("hello") || q.includes("hi")) {
+    return "Hello 👋 Welcome to Global AI Learning!";
+  }
+
+  if (q.includes("ai")) {
+    return "AI means Artificial Intelligence. It allows computers to perform tasks that normally require human intelligence.";
+  }
+
+  if (q.includes("html")) {
+    return "HTML creates the structure of a website.";
+  }
+
+  if (q.includes("css")) {
+    return "CSS controls the design and appearance of a website.";
+  }
+
+  if (q.includes("javascript")) {
+    return "JavaScript makes websites interactive.";
+  }
+
+  if (q.includes("coding")) {
+    return "Coding means giving instructions to a computer using programming languages.";
+  }
+
+  return "I am Astra GPT demo. Ask me about AI, coding, HTML, CSS, JavaScript or learning.";
+}
+
+const courses = {
+  "AI": {
+    title:"Artificial Intelligence",
+    lessons:[
+      ["AI Basics","What AI is, where it is used, and the difference between AI, ML and Generative AI.","AI is the field of building computer systems that can perform tasks involving patterns, decisions, language, vision and other forms of intelligence.","AI → Machine Learning → Deep Learning → Generative AI"],
+      ["Machine Learning","Learn the basic idea of training a model from examples.","Machine learning uses data and algorithms to learn patterns and make predictions or decisions.","Training data → Model → Prediction"],
+      ["Generative AI","Understand how modern AI can generate text, images, code and other content.","Generative AI systems learn patterns from large datasets and generate new outputs from prompts.","Prompt → AI model → Generated output"],
+      ["AI Projects","Turn concepts into practical projects.","Build small projects such as a text classifier, recommendation prototype or learning assistant.","Idea → Data → Model/Logic → Test → Improve"]
+    ]
+  },
+  "Coding": {
+    title:"Programming & Coding",
+    lessons:[
+      ["Programming Basics","Variables, data types, operators and input/output.","Programming means writing precise instructions that a computer can execute.","Input → Processing → Output"],
+      ["C Programming","Learn C fundamentals and problem solving.","Start with variables, conditions, loops, arrays, strings and functions.","int age = 18;"],
+      ["Python","Learn Python syntax and build small programs.","Python is beginner-friendly and useful for automation, data and AI.","print('Hello World')"],
+      ["Java","Learn Java fundamentals and object-oriented programming.","Java programs are built from classes, objects, methods and data.","System.out.println(\"Hello\");"],
+      ["Problem Solving","Practice algorithms and logical thinking.","Break a problem into smaller steps, write an algorithm, code it and test it.","Problem → Algorithm → Code → Test"]
+    ]
+  },
+  "Web Development": {
+    title:"Web Development",
+    lessons:[
+      ["HTML","Build the structure of a webpage.","HTML provides the structure and content of a website.","<h1>Hello World</h1>"],
+      ["CSS","Style webpages and create responsive layouts.","CSS controls layout, spacing, typography and visual presentation.","body { font-family: Arial; }"],
+      ["JavaScript","Make websites interactive.","JavaScript lets webpages respond to clicks, input and other events.","document.body.innerText = 'Hello';"],
+      ["Projects","Combine HTML, CSS and JavaScript.","Build a landing page, calculator, quiz or learning dashboard.","HTML + CSS + JS"]
+    ]
+  },
+  "AI Skills": {
+    title:"Practical AI Skills",
+    lessons:[
+      ["Prompting","Write clear instructions for AI tools.","Good prompts specify the goal, context, constraints and desired output.","Goal + Context + Instructions + Format"],
+      ["AI Tools","Understand practical categories of AI tools.","Explore writing, coding, research, design and productivity workflows.","Choose tool → Give task → Review output"],
+      ["Automation","Connect repeated tasks into workflows.","Automation reduces repetitive manual work by defining triggers and actions.","Trigger → Action → Result"],
+      ["AI Project","Create a small AI-powered project plan.","Define a real problem, choose tools, build a prototype and test it.","Problem → Prototype → Test → Improve"]
+    ]
+  }
+};
+
+let currentCourse = null;
+let currentLesson = 0;
+
+function openCourse(course){
+  currentCourse = courses[course] || courses["Coding"];
+  currentLesson = 0;
+  document.getElementById("courseModal").style.display = "block";
+  document.body.style.overflow = "hidden";
+  renderCourse();
+}
+
+function closeCourse(){
+  document.getElementById("courseModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function renderCourse(){
+  document.getElementById("courseTitle").textContent = currentCourse.title;
+  const list = document.getElementById("lessonList");
+  list.innerHTML = "";
+  currentCourse.lessons.forEach((lesson,i)=>{
+    const item=document.createElement("div");
+    item.className="lesson-item"+(i===currentLesson?" active":"");
+    item.textContent=(i+1)+". "+lesson[0];
+    item.onclick=()=>{currentLesson=i;renderCourse()};
+    list.appendChild(item);
+  });
+
+  const lesson=currentCourse.lessons[currentLesson];
+  const key=currentCourse.title+"-"+currentLesson;
+  const done=localStorage.getItem("gal-done-"+key)==="1";
+
+  document.getElementById("lessonContent").innerHTML=`
+    <h3>${lesson[0]}</h3>
+    <p><strong>What you will learn:</strong> ${lesson[1]}</p>
+    <p>${lesson[2]}</p>
+    <h4>Example</h4>
+    <pre>${escapeHtml(lesson[3])}</pre>
+    <div class="practice">
+      <h4>Practice</h4>
+      <p>Write your own example or solution below. Your work stays in this browser.</p>
+      <textarea id="practiceBox" placeholder="Write your code or notes here..."></textarea>
+      <div class="course-actions">
+        <button onclick="savePractice()">💾 Save Practice</button>
+        <button onclick="toggleComplete()">${done?"↩ Mark Incomplete":"✓ Mark Lesson Complete"}</button>
+        <button onclick="nextLesson()">Next Lesson →</button>
+      </div>
+      <p id="saveStatus"></p>
+    </div>
+  `;
+  const saved=localStorage.getItem("gal-practice-"+key);
+  if(saved) document.getElementById("practiceBox").value=saved;
+  updateProgress();
+}
+
+function escapeHtml(s){
+  return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+}
+
+function savePractice(){
+  const key=currentCourse.title+"-"+currentLesson;
+  localStorage.setItem("gal-practice-"+key,document.getElementById("practiceBox").value);
+  document.getElementById("saveStatus").textContent="Saved ✓";
+}
+
+function toggleComplete(){
+  const key="gal-done-"+currentCourse.title+"-"+currentLesson;
+  if(localStorage.getItem(key)==="1") localStorage.removeItem(key);
+  else localStorage.setItem(key,"1");
+  renderCourse();
+}
+
+function nextLesson(){
+  if(currentLesson<currentCourse.lessons.length-1){
+    currentLesson++;
+    renderCourse();
+  }else{
+    alert("🎉 You reached the end of this course. Review your completed lessons and practice.");
+  }
+}
+
+function updateProgress(){
+  const total=currentCourse.lessons.length;
+  let completed=0;
+  currentCourse.lessons.forEach((_,i)=>{
+    if(localStorage.getItem("gal-done-"+currentCourse.title+"-"+i)==="1") completed++;
+  });
+  const pct=Math.round(completed/total*100);
+  document.getElementById("progressText").textContent=pct+"% complete ("+completed+"/"+total+" lessons)";
+  document.getElementById("progressFill").style.width=pct+"%";
+}
+
+function sendMessage() {
+
+  const input = document.getElementById("input");
+  const question = input.value.trim();
+
+  if (!question) return;
+
+  addMessage(question, "user");
+  input.value = "";
+
+  setTimeout(function() {
+    addMessage(getReply(question), "bot");
+  }, 400);
+}
+
+function handleKey(event) {
+
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+
+}
+
+</script>
+
+</body>
+</html>
